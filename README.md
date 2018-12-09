@@ -30,3 +30,27 @@ The rates define how many "events per unit of time" happen on average. They are 
 ![gene](https://user-images.githubusercontent.com/12504176/49692809-3d3d1400-fb18-11e8-99e6-42a3ae18c2f4.png)
 
 **Example gene we could build with 14 Loci.** In it, locus 1 is a binding element, where polymerase can bind with rate `B`, and elongate with rate `k`. The backtrack, abortion and termination rates are all zero on locus 1. On loci 2 to 3, 5 to 10 and 12 to 13, it can elongate with rate `k`, or backtrack with rate `r`, while all other rates are zero. We could say that those are 3 elongation elements of length 2, 5 and 6 respectively. Locus 4 is also an elongation element with backtrack rate `r`, but with elongation rate `p`. If we consider `p < k`, then locus 4 would be a pausing element, where polymerase takes a longer time than normal to advance. On locus 11, in addition to normal elongation rates, the polymerase may abort with rate A, and so this is an abortion element.  Finally on locus 14 it can either backtrack with rate r, or terminate with rate T and produce an RNA transcript. Note that it cannot elongate (the elongation rate is 0), this is the end of our gene. 
+
+
+## `genesimulator_bistable` - bistable promoter, polymerase pausing and footprint 
+
+`genesimulator_bistable This version adds:
+- Bistable promoter which can switch between ON/OFF states
+- Polymerasees can go into paused state
+- Polymerase now have footprints in bp
+
+The simulation now is considerably longer and matplotlib cant handle large matrices well, so the simulator outputs a CSV file with gene occupancy and a txt file with other parameters instead of plotting them.
+
+Some examples of biological rates:
+```
+Footprint of 30 base pairs
+B = 0.5            polymerase binding rate on the ON state (zero for OFF state)
+r = 80               elongation rate after first escape step
+k_off = 0.2       rate at which the an OFF promoter goes to the ON state
+k_on = 0.5       rate at which the an ON promoter goes to the OFF state
+k_p- = 4           rate for an paused polymerase exit the paused state
+k_p+ = 0.01     rate at which an elongating  polymerase goes to the paused state
+```
+![genesimulator_bistable](https://user-images.githubusercontent.com/12504176/49692939-3a8fee00-fb1b-11e8-828b-e8724a6c33d0.png)
+
+
