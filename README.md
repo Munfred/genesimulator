@@ -3,7 +3,9 @@ Python scripts for an easy to use, modular and customizable gene simulator using
 
 Users can model gene architectures by changing 5 rates for each gene locus: elongation, backtracking, binding, termination and abortion. The program output is a graphical representation of gene occupancy over time, a histogram of time interval between consecutive terminations, a histogram of the time taken per polymerase to transcribe the gene, and a graph of total terminated polymerases.
 
-For complete details see the [user guide](https://github.com/Munfred/genesimulator/blob/master/Gene_Simulator%20(2).pdf)
+For details on the math see the [genesimulator guide](https://github.com/Munfred/genesimulator/blob/master/Gene_Simulator%20(2).pdf)
+
+Note there are two scripts you can use: `genesimulator_simple.py` or `genesimulator_bistable.py` which has extra features described in the last section
 
 
 ## Modeling Framework
@@ -32,14 +34,14 @@ The rates define how many "events per unit of time" happen on average. They are 
 **Example gene we could build with 14 Loci.** In it, locus 1 is a binding element, where polymerase can bind with rate `B`, and elongate with rate `k`. The backtrack, abortion and termination rates are all zero on locus 1. On loci 2 to 3, 5 to 10 and 12 to 13, it can elongate with rate `k`, or backtrack with rate `r`, while all other rates are zero. We could say that those are 3 elongation elements of length 2, 5 and 6 respectively. Locus 4 is also an elongation element with backtrack rate `r`, but with elongation rate `p`. If we consider `p < k`, then locus 4 would be a pausing element, where polymerase takes a longer time than normal to advance. On locus 11, in addition to normal elongation rates, the polymerase may abort with rate A, and so this is an abortion element.  Finally on locus 14 it can either backtrack with rate r, or terminate with rate T and produce an RNA transcript. Note that it cannot elongate (the elongation rate is 0), this is the end of our gene. 
 
 
-## `genesimulator_bistable` - bistable promoter, polymerase pausing and footprint 
+## `genesimulator_bistable` 
 
-`genesimulator_bistable This version adds:
+`genesimulator_bistable.py` includes:
 - Bistable promoter which can switch between ON/OFF states
-- Polymerasees can go into paused state
-- Polymerase now have footprints in bp
+- Polymerase can go into paused state
+- Polymerase  have footprints in bp
 
-The simulation now is considerably longer and matplotlib cant handle large matrices well, so the simulator outputs a CSV file with gene occupancy and a txt file with other parameters instead of plotting them.
+For `genesimulator_bistable.py` the simulation now is considerably longer so the simulator outputs a CSV file with gene occupancy and a txt file with other parameters instead of plotting them.
 
 Some examples of biological rates:
 ```
